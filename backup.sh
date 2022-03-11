@@ -5,12 +5,12 @@
 #+  Packages needed: rsync and openssh
 #   Architecture: Tested and working on x86-64 and aarch64
 
-eval $(ssh-agent)                             # 
+eval $(ssh-agent)                             			# If using a password protected ssh key. If not comment line 8-9.
 ssh-add /home/LOCAL_USER/.ssh/MY_SSH_KEY
 
 
 # Use while loop and ping the backup server.
-IP="REMOTE_IP_HERE"                           #CHANGE THIS
+IP="REMOTE_IP_HERE"                           		#CHANGE THIS
 
 # Maximum number to try
 ((count = 10))								
@@ -19,12 +19,12 @@ while [[ $count -ne 0 ]] ; do
     ping -c 1 $IP 2>&1 >/dev/null			        # Try once.
     rt=$?
     if [[ $rt -eq 0 ]] ; then
-        break		                      	      # If okay, break the loop with "rt"
+        break		                      	      				# If okay, break the loop with "rt"
     fi
-    ((count = count - 1))                  	  # Count 1 so we don't go on forever
+    ((count = count - 1))                  	  			# Count 1 so we don't go on forever
 done
 
-if [[ $rt -eq 0 ]] ; then                 	  # Final check
+if [[ $rt -eq 0 ]] ; then                 	  			# Final check
     echo "Connection established.";
 else
     echo "Connection failed."; 
@@ -34,8 +34,8 @@ fi
 # Config
 DIRECTORY='backup'      
 TIMESTAMP=$(date "+%Y-%m-%d-%H:%M:%S")
-REMOTEUSER=USERNAME                           #EXAMPLE
-LOCALUSER=LOCAL_USERNAME                      #EXAMPLE
+REMOTEUSER=USERNAME 							#EXAMPLE
+LOCALUSER=LOCAL_USERNAME					#EXAMPLE
 SSH="ssh -p 1027 -i /home/mrm/.ssh/backup-servers"
 
 
