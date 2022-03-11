@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 #   Project: Backup script
-#   GNU/Linux Distro: Tested on Void and Debian 
-#+  Packages needed: rsync and openssh
+#   GNU/Linux Distro: Tested on Void Linux and Debian 
+#   Packages needed: rsync and openssh
 #   Architecture: Tested and working on x86-64 and aarch64
 
 eval $(ssh-agent)                             		# If using a password protected ssh key. If not comment line 8-9.
