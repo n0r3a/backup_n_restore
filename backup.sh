@@ -51,7 +51,7 @@ BACKUP_ENTRIES=$(ssh -p 22 -i /home/$LOCALUSER/.ssh/YOUR_SSH_KEY $REMOTEUSER@$IP
 if [ $BACKUP_ENTRIES -gt 0 ]
 then
     echo "Creating snapshot..."
-    LATEST=$(ssh -p 22 -i /home/$LOCALUSER/.ssh/YOUR_SSH_KEY $REMOTEUSER@$IP "ls /home/$REMOTEUSER/$DIRECTORY | tail -1")          # Will check if there is any existing backup
+    LATEST=$(ssh -p 22 -i /home/$LOCALUSER/.ssh/YOUR_SSH_KEY $REMOTEUSER@$IP "ls /home/$REMOTEUSER/$DIRECTORY | tail -1")          # Will check if there are any existing backups
     $SSH $REMOTEUSER@$IP "cp -al /home/$REMOTEUSER/$DIRECTORY/$LATEST /home/$REMOTEUSER/$DIRECTORY/$TIMESTAMP 2>/dev/null >/dev/null"
 fi
 
