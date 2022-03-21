@@ -34,8 +34,8 @@ fi
 # Config
 DIRECTORY='backup'      
 TIMESTAMP=$(date "+%Y-%m-%d-%H:%M:%S")
-REMOTEUSER=USERNAME 						#EXAMPLE
-LOCALUSER=LOCAL_USERNAME					#EXAMPLE
+REMOTEUSER=USERNAME 					#EXAMPLE
+LOCALUSER=LOCAL_USERNAME				#EXAMPLE
 SSH="ssh -p 1027 -i /home/mrm/.ssh/backup-servers"
 
 
@@ -45,19 +45,18 @@ mkdir -p "/home/$LOCALUSER/$DIRECTORY/$TIMESTAMP"
 # Copy local /etc directory to backup directory
 cp -aR /etc "/home/$LOCALUSER/$DIRECTORY/$TIMESTAMP" 2>/dev/null >/dev/null
 
-#set -xv
 #Check entries / are there any older backups?
 BACKUP_ENTRIES=$(ssh -p 22 -i /home/$LOCALUSER/.ssh/YOUR_SSH_KEY $REMOTEUSER@$IP "ls /home/$REMOTEUSER/$DIRECTORY | wc -l")
 if [ $BACKUP_ENTRIES -gt 0 ]
 then
     echo "Creating snapshot..."
-    LATEST=$(ssh -p 22 -i /home/$LOCALUSER/.ssh/YOUR_SSH_KEY $REMOTEUSER@$IP "ls /home/$REMOTEUSER/$DIRECTORY | tail -1")          # Will check if there are any existing backups
+    LATEST=$(ssh -p 22 -i /home/$LOCALUSER/.ssh/YOUR_SSH_KEY $REMOTEUSER@$IP "ls /home/$REMOTEUSER/$DIRECTORY | tail -1")  # Will check if there are any existing backups
     $SSH $REMOTEUSER@$IP "cp -al /home/$REMOTEUSER/$DIRECTORY/$LATEST /home/$REMOTEUSER/$DIRECTORY/$TIMESTAMP 2>/dev/null >/dev/null"
 fi
 
 # Transfer the local backup to main server. rsync will only transfer changed or added files in /etc.
-rsync -avEPhze "ssh -p 22 -i /home/$LOCALUSER/.ssh/MY_SSH_KEY" "/home/$LOCALUSER/$DIRECTORY/$TIMESTAMP" "$REMOTEUSER@$IP:/home/$REMOTEUSER/$DIRECTORY/" # Finally back
-#-avEphz
+rsync -avEPhze "ssh -p 22 -i /home/$LOCALUSER/.ssh/MY_SSH_KEY" "/home/$LOCALUSER/$DIRECTORY/$TIMESTAMP" "$REMOTEUSER@$IP:/home/$REMOTEUSER/$DIRECTORY/"
+
 
 # END
 
