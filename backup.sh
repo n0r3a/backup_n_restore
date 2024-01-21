@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+# test
 #   Project: Backup script
 #   GNU/Linux Distro: Tested on Void Linux and Debian 
 #   Packages needed: rsync and openssh
