@@ -5,9 +5,6 @@
 #   Packages needed: rsync and openssh
 #   Architecture: Tested and working on x86-64 and aarch64
 
-eval $(ssh-agent)                             		# If using a password protected ssh key. If not comment line 8-9.
-ssh-add /home/LOCAL_USER/.ssh/MY_SSH_KEY
-
 
 # Use while loop and ping the backup server.
 IP="REMOTE_IP_HERE"                           		# CHANGE THIS
