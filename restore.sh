@@ -1,9 +1,7 @@
 #!/bin/bash
 #
 # Project: Restore script
-# Gnu/Linux Distro: Tested on Void and debian
 # Packages needed: rsync and openssh
-# Architecture: Tested on aarch64 and x86-64
 
 # Config
 IP="REMOTE_IP_HERE"                 	#EXAMPLE - Remote host IP
